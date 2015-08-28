@@ -46,6 +46,7 @@ class MeetingsController < ApplicationController
 		if meeting_invite.errors.empty?
 			flash[:errors] = nil
 		else
+			Notification.send_invitation_mail(user, @meeting).deliver
 			flash[:errors] = meeting_invite.errors.full_messages.join(';')
 		end
 		

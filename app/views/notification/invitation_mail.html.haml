@@ -1,0 +1,4 @@
+%h2== Hi #{@user.name}
+%p
+	== #{@meeting.owner.name} has invited you to 
+	= link_to "this meeting", meeting_path(@meeting)
