@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828091009) do
+ActiveRecord::Schema.define(version: 20150828114943) do
 
   create_table "meeting_invites", force: :cascade do |t|
     t.integer  "meeting_id", limit: 4
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20150828091009) do
     t.text     "objective",  limit: 65535
     t.datetime "start_time"
     t.datetime "end_time"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "meeting_id", limit: 4
+    t.text     "text",       limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end

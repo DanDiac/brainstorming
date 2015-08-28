@@ -1,0 +1,23 @@
+%h2 Adding a new metting
+= form_for @meeting do |m|
+	%p
+		= label_tag 'name', 'Name'
+		= m.text_field :name, { :value => @meeting.name }
+		- if !@meeting.errors.empty? && !@meeting.errors.messages[:name].empty?
+			= @meeting.errors.messages[:name][0]
+	%p
+		= label_tag 'objective', 'Objective'
+		= m.text_field :objective, { :value => @meeting.objective }
+		- if !@meeting.errors.empty? && !@meeting.errors.messages[:objective].empty?
+			= @meeting.errors.messages[:objective][0]
+	%p
+		= label_tag 'start_time', 'Starting time'
+		= m.datetime_select :start_time, { :value => @meeting.start_time, :include_blank => true }
+		- if !@meeting.errors.empty? && !@meeting.errors.messages[:start_time].empty?
+			= @meeting.errors.messages[:start_time][0]
+	%p
+		= label_tag 'end_time', 'Ending time'
+		= m.datetime_select :end_time, { :value => @meeting.end_time, :include_blank => true }
+		- if !@meeting.errors.empty? && !@meeting.errors.messages[:end_time].empty?
+			= @meeting.errors.messages[:end_time][0]
+	=  m.submit "Save"

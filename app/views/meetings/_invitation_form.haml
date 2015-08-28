@@ -1,0 +1,9 @@
+%strong
+	Invite more people
+= form_for :invite, :url => {:controller => :meetings, :action => :add_new_invitation }, :remote => true do |i|
+	= i.hidden_field :meeting, :value => @meeting.id
+	= label_tag 'invite', 'Invite this person'
+	= i.select :user, User.order("name").all.reject{|u| @meeting.members.index(u)}.map{|u| [u.name, u.id]}
+	= i.submit "Add"
+	- if flash[:errors]
+		= flash[:errors]

@@ -1,0 +1,7 @@
+%div
+	- @meeting.notes.each do |n|
+		%p
+			%strong
+				== #{n.user.name} said:
+			%br
+			= n.text

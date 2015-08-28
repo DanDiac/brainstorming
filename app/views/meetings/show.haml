@@ -1,0 +1,35 @@
+%div
+	%h2= @meeting.name
+	%p== Objective: #{@meeting.objective}
+	%p== Starting Time: #{@meeting.start_time.strftime("%B %d, %Y %H:%M:%S")}
+	%p== End Time: #{@meeting.end_time.strftime("%B %d, %Y, %Y %H:%M:%S")}
+	%ul{:id => "members_list"}
+		= render :partial => "/meetings/members_list"
+- if @meeting.start_time < Time.now && Time.now < @meeting.end_time
+	- if current_user == @meeting.owner
+		%div{ :id => "invitations_form"}
+			= render :partial => "/meetings/invitation_form"
+	%div.workplace
+		%h4 The meeting has started
+		= link_to "Refresh notes", "/meetings/refresh_notes?id=#{@meeting.id}", :remote => true
+		#note_form
+			= render :partial => "/meetings/add_note"
+		%h4
+			%strong Other notes:
+		#notes_list
+			= render :partial => "/meetings/notes_list"
+- elsif @meeting.start_time > Time.now
+	- if current_user == @meeting.owner
+		%div{ :id => "invitations_form"}
+			= render :partial => "/meetings/invitation_form"
+	%p The meeting has not started yet.
+- elsif @meeting.end_time < Time.now
+	%div.workplace
+		%p{ :style => "color: red;"} This meeting is over.
+		%h4
+			%strong Other notes:
+		#notes_list
+			= render :partial => "/meetings/notes_list"
+		
+	
+	

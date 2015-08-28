@@ -1,0 +1,10 @@
+!!!
+%html{:lang => "en"}
+	%head
+		= javascript_include_tag "application"
+		= csrf_meta_tags
+	%body
+		%header#header
+			= link_to "Logout", destroy_user_session_path, :method => :delete	
+			= link_to "Dashboard", root_path
+		= yield

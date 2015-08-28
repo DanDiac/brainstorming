@@ -1,0 +1,1 @@
+$("#notes_list").html("<%= escape_javascript(render partial: '/meetings/notes_list' ) %>")

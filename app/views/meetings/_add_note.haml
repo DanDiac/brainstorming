@@ -1,0 +1,7 @@
+%strong
+	Add a note
+= form_for :note, :url => {:controller => :meetings, :action => :add_note }, :remote => true do |n|
+	= n.hidden_field :meeting_id, :value => @meeting.id
+	= label_tag 'text', 'Text'
+	= n.text_area :text
+	= n.submit "Add"

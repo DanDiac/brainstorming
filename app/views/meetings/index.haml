@@ -1,2 +1,17 @@
-%h2 Test
-= link_to "Logout", destroy_user_session_path, :method => :delete
+%h2== Welcome, #{current_user.name}
+%div
+	- symbols = ["meetings", "invitations"]
+	- ["Meetings you have created", "Meetings you were invited to"].each_with_index do |title, i|
+		%h3= title
+		%div
+			- ["past", "running", "upcoming"].each do |rep|
+				%h4== #{rep.capitalize} meetings
+				- if current_user.send(symbols[i].to_sym).send(rep.to_sym).empty?
+					%p
+						None
+				- else
+					%ul
+						- current_user.send(symbols[i].to_sym).send(rep.to_sym).each do |m|
+							%li
+								= link_to m.name, meeting_path(m)
+				
